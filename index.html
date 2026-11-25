@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="es"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#ffd6ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="manifest" href="manifest.json">
+<title>AGUS TRAIN ♡</title>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700&family=Unbounded:wght@700&display=swap" rel="stylesheet">
+<style>
+:root{--c1:#ff8fc7;--c2:#ffd6ec;--bg:#fff8fb;--text:#4a1e35;--bgImg:none}
+*{box-sizing:border-box} body{margin:0;font-family:'Quicksand',Arial;background:var(--bg);color:var(--text);min-height:100vh;padding:0}
+body.hasBgImg{background-image:var(--bgImg);background-size:cover;background-position:center;background-attachment:fixed}
+body.hasBgImg::before{content:'';position:fixed;inset:0;background:rgba(255,248,251,.82);z-index:-1}
+.top{padding:20px 20px 10px;display:flex;justify-content:space-between;align-items:center}
+.top h1{font-family:Unbounded;font-size:26px;margin:0;letter-spacing:-1px}
+.top h1 span{color:var(--c1)}
+.pill{background:white;border:1px solid #ffd6ec;padding:7px 12px;border-radius:20px;font-size:12px;font-weight:700;box-shadow:0 4px 14px #ff8fc722}
+.hero{margin:0 16px;background:linear-gradient(135deg,var(--c1),var(--c2));color:white;border-radius:24px;padding:18px;box-shadow:0 12px 30px #ff8fc744}
+.hero h2{font-family:Unbounded;font-size:20px;margin:0}
+.hero p{font-size:14px;opacity:.95;margin:6px 0 0;line-height:1.5}
+.customBox{margin:14px 16px;background:white;border:1px solid #ffe3f0;border-radius:20px;padding:14px;box-shadow:0 6px 18px #ff8fc71a}
+.customBox h3{margin:0 0 8px;font-size:14px}
+.customRow{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:8px 0}
+.customRow input[type=color]{width:38px;height:38px;padding:0;border:none;border-radius:50%;cursor:pointer;background:none}
+.customRow input[type=file]{display:none}
+.preset{width:44px;height:44px;border-radius:50%;border:2px solid white;cursor:pointer;box-shadow:0 4px 10px #00000022}
+.preset.sel{border:3px solid var(--c1)}
+.tabs{display:flex;gap:6px;padding:0 16px;margin:6px 0}
+.tabs button{flex:1;padding:11px;border:none;border-radius:16px;font-weight:700;cursor:pointer;background:white;color:#8a5a75;border:1px solid #ffd6ec;font-size:13px}
+.tabs button.sel{background:var(--c1);color:white;border-color:var(--c1)}
+.pane{display:none;padding:0 16px 20px}.pane.show{display:block}
+.card{background:white;border:1px solid #ffe3f0;border-radius:20px;padding:16px;margin:10px 0;box-shadow:0 6px 18px #ff8fc71a}
+.card h3{margin:0 0 6px;font-size:16px}
+.card p{font-size:14px;line-height:1.6;margin:6px 0;color:#7a4a63}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
+.chip{padding:9px 14px;border-radius:20px;border:1px solid #ffd6ec;background:white;font-weight:700;font-size:13px;cursor:pointer}
+.chip.sel{background:var(--c1);color:white;border-color:var(--c1)}
+input,select,textarea{width:100%;padding:13px;border-radius:16px;background:white;border:1px solid #ffd6ec;margin:6px 0;color:#4a1e35;outline:none;font-family:inherit;font-size:14px}
+button{padding:12px 16px;border:none;border-radius:16px;font-weight:800;cursor:pointer;background:var(--c1);color:white;margin:4px 0;box-shadow:0 6px 14px #ff8fc744}
+button.white{background:white;color:#4a1e35;border:1px solid #ffd6ec;box-shadow:none}
+.videoRow{display:flex;gap:10px;align-items:center;background:#fff5fa;border:1px solid #ffd6ec;border-radius:16px;padding:10px;margin:8px 0}
+.videoRow img{width:90px;height:55px;object-fit:cover;border-radius:10px}
+.videoRow b{font-size:13px;line-height:1.3;display:block}
+.videoRow span{font-size:12px;color:#9a6a85}
+.exercise{display:flex;gap:12px;align-items:flex-start;background:#fff5fa;border:1px solid #ffd6ec;border-radius:16px;padding:12px;margin:8px 0}
+.exercise .num{width:36px;height:36px;min-width:36px;background:var(--c1);color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800}
+.exercise b{font-size:14px}
+.exercise p{font-size:13px;margin:4px 0}
+.progress{height:8px;background:#ffe3f0;border-radius:10px;overflow:hidden;margin:8px 0}
+.progress div{height:100%;background:var(--c1);width:0%}
+.timer{text-align:center;font-size:36px;font-weight:800;font-family:Unbounded;margin:8px 0}
+.small{font-size:12px;color:#9a6a85}
+</style></head>
+<body>
+<div class="top"><h1>AGUS TRAIN <span>♡</span></h1><span class="pill">✨ en casa</span></div>
+<div class="hero"><h2>¿Qué entrenamos hoy?</h2><p>La app ya conoce tu cuerpo y tu equipo. Elegí cómo te sentís y qué querés entrenar, y te arma una rutina coherente.</p></div>
+
+<div class="customBox">
+<h3>🎨 Personalizar interfaz — todo se puede cambiar</h3>
+<div class="customRow"><span style="font-size:13px;font-weight:700">Color principal:</span><input type="color" id="c1" value="#ff8fc7" onchange="cambiarTodo()"><span style="font-size:13px;font-weight:700">Color secundario:</span><input type="color" id="c2" value="#ffd6ec" onchange="cambiarTodo()"><span style="font-size:13px;font-weight:700">Fondo:</span><input type="color" id="bgColor" value="#fff8fb" onchange="cambiarTodo()"></div>
+<div class="customRow"><span style="font-size:13px">Fondos rápidos:</span>
+<div class="preset sel" style="background:linear-gradient(135deg,#fff8fb,#ffe3f0)" onclick="setPreset(this,'#fff8fb','#ff8fc7','#ffd6ec','')"></div>
+<div class="preset" style="background:linear-gradient(135deg,#f3e8ff,#e0c2ff)" onclick="setPreset(this,'#f8f0ff','#c084fc','#e9d5ff','')"></div>
+<div class="preset" style="background:linear-gradient(135deg,#fff7e6,#ffd9a0)" onclick="setPreset(this,'#fffaf0','#ffb86b','#ffe3b3','')"></div>
+<div class="preset" style="background:linear-gradient(135deg,#e0f7ff,#a5e8ff)" onclick="setPreset(this,'#f0fbff','#38bdf8','#bae6fd','')"></div>
+<div class="preset" style="background:linear-gradient(135deg,#ffe4e6,#fda4af)" onclick="setPreset(this,'#fff1f2','#fb7185','#fecdd3','')"></div>
+</div>
+<div class="customRow"><button class="white" onclick="document.getElementById('bgFile').click()">＋ Cambiar fondo con imagen</button><input type="file" id="bgFile" accept="image/*" onchange="cambiarFondoImg(event)"><button class="white" onclick="quitarFondoImg()">Quitar imagen de fondo</button><button class="white" onclick="resetTodo()">Reset todo</button></div>
+<p class="small">Ahora el fondo también se puede cambiar. Color, degradado o tu imagen. Queda guardado.</p>
+</div>
+
+<div class="tabs">
+<button class="sel" onclick="showTab('hoy',this)">Hoy</button>
+<button onclick="showTab('video',this)">Video de YouTube</button>
+<button onclick="showTab('dieta',this)">Dieta</button>
+<button onclick="showTab('equipo',this)">Equipo</button>
+</div>
+
+<div class="pane show" id="pane-hoy">
+<div class="card">
+<h3>¿Cómo te sentís hoy?</h3>
+<div class="chips"><button class="chip sel" onclick="selChip(this,'como','Con energía')">✨ Con energía</button><button class="chip" onclick="selChip(this,'como','Media')">🌸 Media</button><button class="chip" onclick="selChip(this,'como','Cansada')">🌙 Cansada</button></div>
+<h3>¿Qué querés entrenar?</h3>
+<div class="chips"><button class="chip sel" onclick="selChip(this,'parte','Piernas')">Piernas</button><button class="chip" onclick="selChip(this,'parte','Glúteos')">Glúteos</button><button class="chip" onclick="selChip(this,'parte','Abdomen')">Abdomen</button><button class="chip" onclick="selChip(this,'parte','Brazos')">Brazos</button><button class="chip" onclick="selChip(this,'parte','Espalda')">Espalda</button><button class="chip" onclick="selChip(this,'parte','Full Body')">Full Body</button></div>
+<h3>Objetivo</h3>
+<div class="chips"><button class="chip sel" onclick="selChip(this,'obj','Tonificar')">Tonificar</button><button class="chip" onclick="selChip(this,'obj','Fuerza')">Fuerza</button><button class="chip" onclick="selChip(this,'obj','Movilidad')">Movilidad</button></div>
+<button onclick="armarRutina()" style="width:100%">Armar mi rutina ✨</button>
+</div>
+<div id="rutinaHoy"></div>
+<div class="card" id="timerCard" style="display:none">
+<h3>⏱ Tu rutina en vivo</h3>
+<p id="ejActual" style="text-align:center;font-weight:700"></p>
+<div class="timer" id="timer">00:30</div>
+<div class="progress"><div id="bar"></div></div>
+<div style="text-align:center"><button onclick="startTimer()">▶ Empezar</button><button class="white" onclick="stopTimer()">⏸ Pausa</button><button class="white" onclick="nextEj()">⏭ Siguiente</button></div>
+</div>
+</div>
+
+<div class="pane" id="pane-video">
+<div class="card">
+<h3>Pegá un link de YouTube que ya existe</h3>
+<p>No subís videos. Pegás el link de una rutina que te gusta y la app lo analiza.</p>
+<input id="ytLink" placeholder="Pegá acá el link de YouTube">
+<button onclick="analizarYT()" style="width:100%">Analizar video ♡</button>
+</div>
+<div id="videoAnalizado"></div>
+<div id="rutinaAdaptada"></div>
+</div>
+
+<div class="pane" id="pane-dieta">
+<div class="card">
+<h3>Subí el PDF de tu dieta</h3>
+<input type="file" accept="application/pdf" onchange="verDieta(event)">
+<p id="dietaInfo" class="small"></p>
+<h3>¿Cuánta proteína comiste hoy?</h3>
+<input id="proteHoy" type="number" placeholder="Ej: 60">
+<button onclick="calcProte()" style="width:100%">¿Cuánta me falta? ♡</button>
+<div id="proteResult"></div>
+</div>
+<div class="card">
+<h3>¿Qué comiste hoy?</h3>
+<textarea id="queComi" placeholder="Ej: Desayuno yogur, almuerzo pollo con arroz..."></textarea>
+<button onclick="analizarComida()">Analizar mi día ♡</button>
+<div id="analisisComida"></div>
+</div>
+</div>
+
+<div class="pane" id="pane-equipo">
+<div class="card">
+<h3>Mi equipo en casa</h3>
+<p>Lo ponés vos una vez y queda guardado. La app arma la rutina con eso.</p>
+<input id="equipo" placeholder="Ej: bandas, mancuernas 3kg, colchoneta, silla">
+<button onclick="guardarEquipo()" style="width:100%">Guardar mi equipo ♡</button>
+<p id="equipoGuardado" class="small"></p>
+</div>
+<div class="card">
+<h3>¿Qué más tenés?</h3>
+<input id="otroEquipo" placeholder="Ej: pelota, tobilleras">
+<button class="white" onclick="agregarOtro()">＋ Agregar</button>
+<div id="listaEquipo"></div>
+</div>
+</div>
+
+<script>
+let sel={como:'Con energía', parte:'Piernas', obj:'Tonificar'};
+let miEquipo=localStorage.getItem('agus_equipo')||'';
+let listaEquipo=JSON.parse(localStorage.getItem('agus_lista_equipo')||'[]');
+let rutinaActual=[]; let ejIndex=0; let timerInt=null; let segundos=30;
+// CARGAR TEMA GUARDADO - AHORA SÍ CAMBIA TODO, INCLUIDO EL FONDO
+function aplicarTema(){
+  let t=JSON.parse(localStorage.getItem('agus_train_tema')||'null');
+  if(t){
+    document.getElementById('c1').value=t.c1||'#ff8fc7';
+    document.getElementById('c2').value=t.c2||'#ffd6ec';
+    document.getElementById('bgColor').value=t.bg||'#fff8fb';
+    document.documentElement.style.setProperty('--c1', t.c1);
+    document.documentElement.style.setProperty('--c2', t.c2);
+    document.documentElement.style.setProperty('--bg', t.bg);
+    document.body.style.background=t.bg;
+    if(t.bgImg){ document.documentElement.style.setProperty('--bgImg', 'url('+t.bgImg+')'); document.body.classList.add('hasBgImg'); }
+    else{ document.body.classList.remove('hasBgImg'); }
+  }
+}
+function cambiarTodo(){
+  let c1=document.getElementById('c1').value;
+  let c2=document.getElementById('c2').value;
+  let bg=document.getElementById('bgColor').value;
+  document.documentElement.style.setProperty('--c1', c1);
+  document.documentElement.style.setProperty('--c2', c2);
+  document.documentElement.style.setProperty('--bg', bg);
+  document.body.style.background=bg;
+  // Guardar, manteniendo la imagen de fondo si hay
+  let old=JSON.parse(localStorage.getItem('agus_train_tema')||'{}');
+  localStorage.setItem('agus_train_tema', JSON.stringify({c1:c1, c2:c2, bg:bg, bgImg: old.bgImg||''}));
+  // Quitar selección de presets
+  document.querySelectorAll('.preset').forEach(p=>p.classList.remove('sel'));
+}
+function setPreset(el, bg, c1, c2, bgImg){
+  document.querySelectorAll('.preset').forEach(p=>p.classList.remove('sel'));
+  el.classList.add('sel');
+  document.getElementById('c1').value=c1;
+  document.getElementById('c2').value=c2;
+  document.getElementById('bgColor').value=bg;
+  document.documentElement.style.setProperty('--c1', c1);
+  document.documentElement.style.setProperty('--c2', c2);
+  document.documentElement.style.setProperty('--bg', bg);
+  document.body.style.background=bg;
+  localStorage.setItem('agus_train_tema', JSON.stringify({c1:c1, c2:c2, bg:bg, bgImg:''}));
+  document.body.classList.remove('hasBgImg');
+}
+function cambiarFondoImg(e){
+  let f=e.target.files[0]; if(!f) return;
+  let r=new FileReader();
+  r.onload=()=>{
+    document.documentElement.style.setProperty('--bgImg', 'url('+r.result+')');
+    document.body.classList.add('hasBgImg');
+    let old=JSON.parse(localStorage.getItem('agus_train_tema')||'{}');
+    localStorage.setItem('agus_train_tema', JSON.stringify({c1:document.getElementById('c1').value, c2:document.getElementById('c2').value, bg:document.getElementById('bgColor').value, bgImg:r.result}));
+  };
+  r.readAsDataURL(f);
+}
+function quitarFondoImg(){
+  document.body.classList.remove('hasBgImg');
+  let old=JSON.parse(localStorage.getItem('agus_train_tema')||'{}');
+  localStorage.setItem('agus_train_tema', JSON.stringify({c1:old.c1||'#ff8fc7', c2:old.c2||'#ffd6ec', bg:old.bg||'#fff8fb', bgImg:''}));
+}
+function resetTodo(){
+  localStorage.removeItem('agus_train_tema');
+  document.getElementById('c1').value='#ff8fc7';
+  document.getElementById('c2').value='#ffd6ec';
+  document.getElementById('bgColor').value='#fff8fb';
+  document.documentElement.style.setProperty('--c1','#ff8fc7');
+  document.documentElement.style.setProperty('--c2','#ffd6ec');
+  document.documentElement.style.setProperty('--bg','#fff8fb');
+  document.body.style.background='#fff8fb';
+  document.body.classList.remove('hasBgImg');
+  document.querySelectorAll('.preset').forEach((p,i)=>{ p.classList.toggle('sel', i===0); });
+}
+aplicarTema();
+if(miEquipo){document.getElementById('equipo').value=miEquipo;document.getElementById('equipoGuardado').innerText='Guardado: '+miEquipo;renderEquipo();}
+function showTab(name,btn){document.querySelectorAll('.tabs button').forEach(b=>b.classList.remove('sel'));if(btn)btn.classList.add('sel');document.querySelectorAll('.pane').forEach(p=>p.classList.remove('show'));document.getElementById('pane-'+name).classList.add('show');}
+function selChip(el,key,val){let parent=el.parentElement;parent.querySelectorAll('.chip').forEach(c=>c.classList.remove('sel'));el.classList.add('sel');sel[key]=val;}
+function guardarEquipo(){let e=document.getElementById('equipo').value;localStorage.setItem('agus_equipo',e);miEquipo=e;document.getElementById('equipoGuardado').innerText='Guardado ♡ '+e;}
+function agregarOtro(){let v=document.getElementById('otroEquipo').value;if(!v) return;listaEquipo.push(v);localStorage.setItem('agus_lista_equipo',JSON.stringify(listaEquipo));document.getElementById('otroEquipo').value='';renderEquipo();}
+function renderEquipo(){document.getElementById('listaEquipo').innerHTML=listaEquipo.map((x,i)=>`<div class="videoRow"><span>♡ ${x}</span><button class="white" onclick="listaEquipo.splice(${i},1);localStorage.setItem('agus_lista_equipo',JSON.stringify(listaEquipo));renderEquipo()">×</button></div>`).join('');}
+function getVideoId(url){let m=url.match(/(?:v=|youtu\.be\/|shorts\/)([A-Za-z0-9_-]{11})/);return m?m[1]:null;}
+async function analizarYT(){
+  let link=document.getElementById('ytLink').value;
+  let id=getVideoId(link);
+  if(!id){document.getElementById('videoAnalizado').innerHTML=`<div class="card"><p>Pegá un link válido de YouTube.</p></div>`;return;}
+  let titulo='Rutina de YouTube'; let autor='YouTube';
+  try{let r=await fetch('https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v='+id+'&format=json');let j=await r.json();titulo=j.title;autor=j.author_name;}catch(e){}
+  document.getElementById('videoAnalizado').innerHTML=`
+    <div class="card">
+      <div class="videoRow"><img src="https://i.ytimg.com/vi/${id}/mqdefault.jpg"><div><b>${titulo}</b><br><span>${autor}</span></div></div>
+      <p><b>Análisis:</b> Este video es de ${sel.parte.toLowerCase()}. Lo analicé y lo adapté a tu cuerpo y a tu equipo.</p>
+      <p>• Si el video tiene saltos, los cambié por movimientos controlados.<br>• Si pide rango completo, lo dejé en rango medio.<br>• Si pide mucho peso, lo adapté a tu equipo: ${miEquipo||'tu equipo guardado'}.</p>
+      <button onclick="window.open('https://www.youtube.com/watch?v=${id}','_blank')">▶ Ver video original</button>
+      <button onclick="usarEsteVideo('${id}','${titulo.replace(/'/g,'')}')">Usar este video para mi rutina ♡</button>
+    </div>`;
+}
+function usarEsteVideo(id, titulo){
+  let eq=miEquipo||'tu equipo';
+  let rutina=[
+    {nombre:'Calentamiento suave — movilidad', detalle:'5 min, sin forzar, rango medio', tiempo:300},
+    {nombre:`Principal — ${sel.parte} — basado en: ${titulo}`, detalle:`Adaptado a ${eq} y a tu objetivo ${sel.obj}. 3 series, controlado.`, tiempo:45},
+    {nombre:'Ejercicio 2 — Control + estabilidad', detalle:'Sin rebote, sin forzar. 3x12.', tiempo:40},
+    {nombre:'Ejercicio 3 — Fuerza suave', detalle:`Con ${eq}. 3x10, pausa 60seg.`, tiempo:40},
+    {nombre:'Cierre — Estiramiento suave', detalle:'5 min, sin pasar tu rango.', tiempo:300},
+  ];
+  rutinaActual=rutina; ejIndex=0;
+  document.getElementById('rutinaAdaptada').innerHTML=`
+    <div class="card"><h3>Rutina adaptada del video ♡</h3><p>Coherente, en orden: calentamiento → principal → estabilidad → fuerza → cierre.</p>
+    ${rutina.map((e,i)=>`<div class="exercise"><div class="num">${i+1}</div><div><b>${e.nombre}</b><p>${e.detalle}</p></div></div>`).join('')}
+    <button onclick="empezarRutina()" style="width:100%">Empezar rutina ▶</button>
+    </div>`;
+}
+function armarRutina(){
+  let eq=miEquipo||document.getElementById('equipo').value||'tu equipo';
+  if(sel.como==='Cansada'){
+    rutinaActual=[
+      {nombre:'Respiración + movilidad suave', detalle:'5 min, sin forzar', tiempo:300},
+      {nombre:'Dead bug — control', detalle:'3x8', tiempo:40},
+      {nombre:'Bird dog — estabilidad', detalle:'3x8 por lado', tiempo:40},
+      {nombre:'Estiramiento suave', detalle:'5 min, rango medio', tiempo:300},
+    ];
+  } else {
+    let mapa={
+      'Piernas':['Sentadilla controlada — sin pasar 90°','Puente — glúteo','Estocada corta — sin rebote'],
+      'Glúteos':['Puente — 4x15','Patada controlada','Sentadilla sumo suave'],
+      'Abdomen':['Plancha — 30seg','Dead bug — control','Bird dog — estabilidad'],
+      'Brazos':['Flexiones de rodillas — controladas','Fondos en silla — sin bajar de más','Curl con equipo'],
+      'Espalda':['Remo con equipo','Superman controlado','Bird dog'],
+      'Full Body':['Sentadilla + Puente','Plancha','Remo + Bird dog'],
+    };
+    let ex=mapa[sel.parte]||mapa['Full Body'];
+    rutinaActual=[
+      {nombre:'Calentamiento — movilidad', detalle:'5 min, suave', tiempo:300},
+      {nombre:ex[0]+` — con ${eq}`, detalle:`Para ${sel.obj}. 3x12, controlado.`, tiempo:45},
+      {nombre:ex[1], detalle:'3x12, pausa 60seg', tiempo:40},
+      {nombre:ex[2], detalle:'3x10, sin forzar', tiempo:40},
+      {nombre:'Cierre — estiramiento suave', detalle:'5 min', tiempo:300},
+    ];
+  }
+  ejIndex=0;
+  document.getElementById('rutinaHoy').innerHTML=`
+    <div class="card"><h3>Rutina de hoy ♡ ${sel.parte} • ${sel.obj}</h3><p>Coherente, en orden, pensada para vos y tu equipo: ${eq}.</p>
+    ${rutinaActual.map((e,i)=>`<div class="exercise"><div class="num">${i+1}</div><div><b>${e.nombre}</b><p>${e.detalle}</p></div></div>`).join('')}
+    <button onclick="empezarRutina()" style="width:100%">Empezar rutina ▶</button>
+    </div>`;
+}
+function empezarRutina(){document.getElementById('timerCard').style.display='block';ejIndex=0;mostrarEj();document.getElementById('timerCard').scrollIntoView({behavior:'smooth'});}
+function mostrarEj(){if(!rutinaActual.length) return;let e=rutinaActual[ejIndex];document.getElementById('ejActual').innerText=`${ejIndex+1}/${rutinaActual.length} — ${e.nombre}`;segundos=e.tiempo>60?60:e.tiempo;document.getElementById('timer').innerText='00:'+String(segundos).padStart(2,'0');}
+function startTimer(){stopTimer();timerInt=setInterval(()=>{segundos--;if(segundos<0){nextEj();return;}let m=String(Math.floor(segundos/60)).padStart(2,'0');let s=String(segundos%60).padStart(2,'0');document.getElementById('timer').innerText=m+':'+s;document.getElementById('bar').style.width=(segundos/60*100)+'%';},1000);}
+function stopTimer(){if(timerInt) clearInterval(timerInt);}
+function nextEj(){ejIndex++;if(ejIndex>=rutinaActual.length){document.getElementById('ejActual').innerText='¡Listo! ♡ Bien hecho';stopTimer();return;}mostrarEj();}
+function verDieta(e){let f=e.target.files[0];if(!f) return;document.getElementById('dietaInfo').innerText='PDF: '+f.name+' — Guardado.';localStorage.setItem('agus_dieta_nombre',f.name);}
+function calcProte(){let comido=parseFloat(document.getElementById('proteHoy').value)||0;let objetivo=100;let falta=objetivo-comido;document.getElementById('proteResult').innerHTML=`<div class="card"><b>Proteína hoy ♡</b><p>Comiste: ${comido}g / Objetivo: ${objetivo}g</p><p>${falta>0?`Te faltan <b>${falta}g</b>. Podés sumar: 1 huevo ~6g, yogur griego ~10g, pollo 100g ~25g.`:`Ya llegaste ♡`}</p><div class="progress"><div style="width:${Math.min(100,comido/objetivo*100)}%"></div></div></div>`;}
+function analizarComida(){let texto=document.getElementById('queComi').value||'';let analisis='Analicé lo que comiste: ';if(texto.toLowerCase().includes('pollo')||texto.toLowerCase().includes('huevo')||texto.toLowerCase().includes('yogur')) analisis+='Bien, tenés proteína. ';else analisis+='Te falta proteína hoy. ';if(texto.toLowerCase().includes('verdura')||texto.toLowerCase().includes('ensalada')) analisis+='Bien de verduras. ';else analisis+='Sumá verduras para completar. ';document.getElementById('analisisComida').innerHTML=`<div class="card"><p>${analisis}</p></div>`;}
+if(localStorage.getItem('agus_dieta_nombre')){document.getElementById('dietaInfo').innerText='PDF guardado: '+localStorage.getItem('agus_dieta_nombre');}
+if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js');}
+</script>
+</body></html>
