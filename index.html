@@ -110,6 +110,16 @@ button{padding:12px 16px;border:none;border-radius:16px;font-weight:800;cursor:p
 
 <script>
 const EJERCICIOS = {
+// === GUARDADO EN EL DISPOSITIVO, NO EN EL CACHE - Agus Train ===
+let _db=null;
+async function pedirQueNoSeBorre(){ try{ if(navigator.storage && navigator.storage.persist){ await navigator.storage.persist(); } }catch(e){} }
+function abrirDB(){ return new Promise((res,rej)=>{ if(_db) return res(_db); let req=indexedDB.open("agus-apps-db",1); req.onupgradeneeded=()=>{ let d=req.result; if(!d.objectStoreNames.contains("datos")) d.createObjectStore("datos"); }; req.onsuccess=()=>{ _db=req.result; res(_db); }; req.onerror=()=>rej(req.error); }); }
+async function guardarSeguro(clave, valor){ try{ let v=(typeof valor==='string')?valor:JSON.stringify(valor); let db=await abrirDB(); let tx=db.transaction("datos","readwrite"); tx.objectStore("datos").put(v, clave); try{ localStorage.setItem(clave, v); }catch(e){} }catch(e){ try{ localStorage.setItem(clave, (typeof valor==='string')?valor:JSON.stringify(valor)); }catch(e2){} } }
+async function borrarSeguro(clave){ try{ let db=await abrirDB(); let tx=db.transaction("datos","readwrite"); tx.objectStore("datos").delete(clave); }catch(e){} try{ localStorage.removeItem(clave); }catch(e){} }
+async function restaurarTodo(){ try{ let claves=['agus_semana','agus_equipo','agus_lista_equipo','agus_plan_hoy','agus_train_tema','agus_plan','agus_historial','agus_pesos','agus_dieta_nombre']; let db=await abrirDB(); for(let clave of claves){ let tx=db.transaction("datos","readonly"); let req=tx.objectStore("datos").get(clave); let val=await new Promise((res)=>{ req.onsuccess=()=>res(req.result); req.onerror=()=>res(null); }); if(val!==null && val!==undefined){ try{ localStorage.setItem(clave, val); }catch(e){} } } }catch(e){} }
+pedirQueNoSeBorre();
+restaurarTodo().then(()=>{ try{ renderHistorial(); renderProgreso(); if(typeof renderMiPlan==='function') renderMiPlan(); if(typeof renderEquipo==='function') renderEquipo(); }catch(e){} });
+// === FIN GUARDADO SEGURO ===
   'Sentadilla': {gif:'https://www.spotebi.com/wp-content/uploads/2014/10/squat-exercise-illustration.gif', como:'Pies al ancho de hombros, bajá hasta 90°.', evita:'No bajes más de 90°.'},
   'Sentadilla sumo': {gif:'https://www.spotebi.com/wp-content/uploads/2014/10/sumo-squat-exercise-illustration.gif', como:'Pies abiertos, puntas afuera, bajá hasta 90°.', evita:'No rebotes.'},
   'Puente': {gif:'https://www.spotebi.com/wp-content/uploads/2014/10/glute-bridge-exercise-illustration.gif', como:'Boca arriba, subí la cadera apretando glúteos.', evita:'No arquees.'},
