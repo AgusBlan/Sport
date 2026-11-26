@@ -1,7 +1,6 @@
 {
   "name": "Agus Train ♡",
   "short_name": "Agus Train",
-  "description": "Tu entrenadora en casa",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#fff8fb",
@@ -10,19 +9,19 @@
   "scope": "./",
   "icons": [
     {
-      "src": "icon-192.png",
+      "src": "https://static.vecteezy.com/system/resources/thumbnails/052/295/270/small/pink-dumbbell-3d-illustration-isolated-on-the-transparent-background-png.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "icon-512.png",
+      "src": "https://static.vecteezy.com/system/resources/thumbnails/052/295/270/small/pink-dumbbell-3d-illustration-isolated-on-the-transparent-background-png.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "icon-512.png",
+      "src": "https://static.vecteezy.com/system/resources/thumbnails/052/295/270/small/pink-dumbbell-3d-illustration-isolated-on-the-transparent-background-png.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
