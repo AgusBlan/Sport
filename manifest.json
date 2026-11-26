@@ -19,12 +19,6 @@
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
-    },
-    {
-      "src": "https://static.vecteezy.com/system/resources/thumbnails/052/295/270/small/pink-dumbbell-3d-illustration-isolated-on-the-transparent-background-png.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "maskable"
     }
   ]
 }
